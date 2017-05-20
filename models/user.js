@@ -5,10 +5,10 @@
  */
 
 const mongoose = require('mongoose')
-const bcrypt   = require('bcrypt-nodejs')
-const crypto   = require('crypto')
+const bcrypt = require('bcrypt-nodejs')
+const crypto = require('crypto')
 
-const Schema   = mongoose.Schema
+const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
@@ -16,10 +16,10 @@ const UserSchema = new Schema({
   avatar: String,
   password: { type: String, select: false },
   signupDate: { type: Date, default: Date.now },
-  lastLogin: type: Date
+  lastLogin: Date
 })
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function (next) {
   let user = this
 
   if (!user.isModified('password')) return next()
