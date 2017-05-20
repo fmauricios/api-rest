@@ -1,0 +1,24 @@
+<form id="login" class="pure-form pure-form-stacked pure-form-aligned" method="post">
+  <fieldset class="pure-group">
+    <input type="email" class="pure-input-1-2" value="" name="email" placeholder="example@example.com">
+    <input type="password" class="pure-input-1-2" value="" name="password" placeholder="********">
+  </fieldset>
+  <input type="submit" class="pure-button pure-input-1-2 pure-button-primary" value="Login">
+</form>
+
+<script type="text/javascript">
+  const formLogin = document.querySelector('#login');
+  const formData = new FormData(formLogin);
+
+  formLogin.addEventListener('submit', event => {
+    event.preventDefault()
+    fetch('/api/login', {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      localStorage.setItem('token', data.token)
+    })
+  })
+</script>
